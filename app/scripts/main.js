@@ -1,6 +1,9 @@
 /*global ZmachineClient, $*/
 
 window.ZmachineClient = {
+  Config: {
+    apiUrl: 'http://localhost:5000'
+  },
   Models: {},
   Collections: {},
   Views: {},

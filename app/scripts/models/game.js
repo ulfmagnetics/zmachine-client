@@ -7,7 +7,7 @@ ZmachineClient.Models = ZmachineClient.Models || {};
 
   ZmachineClient.Models.Game = Backbone.Model.extend({
 
-    url: '',
+    idAttribute: 'pid',
 
     initialize: function() {
     },
@@ -20,6 +20,10 @@ ZmachineClient.Models = ZmachineClient.Models || {};
 
     parse: function(response, options)  {
       return response;
+    },
+
+    description: function() {
+      return this.get('label') + ' (' + this.get('zfile') + ')';
     }
   });
 

@@ -18,11 +18,11 @@
   "jquery": true,
   "globals": {
     "ZmachineClient": true,
-    "zmachine-client": true,
     "_": false,
     "Backbone": false,
     "JST": false,
     "beforeEach": false,
+    "context": false,
     "describe": false,
     "it": false,
     "assert": true,
