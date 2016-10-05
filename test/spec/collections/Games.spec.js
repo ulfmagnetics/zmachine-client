@@ -18,8 +18,6 @@ describe('Games Collection', function () {
 
     it('returns an array of available Game models', function() {
       var subject = ZmachineClient.Collections.Games.allAvailableGames();
-      console.log(subject[0]);
-      console.log(subject[1]);
       expect(_.size(subject)).to.equal(2);
       expect(subject[0].get('name')).to.equal('election');
       expect(subject[0].get('label')).to.equal('Election Evil!');

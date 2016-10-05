@@ -1,4 +1,4 @@
-/*global ZmachineClient, $*/
+/*global ZmachineClient, Backbone, $*/
 
 window.ZmachineClient = {
   Config: {

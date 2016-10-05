@@ -8,6 +8,7 @@ ZmachineClient.Routers = ZmachineClient.Routers || {};
   ZmachineClient.Routers.Game = Backbone.Router.extend({
     routes: {
       'games/new': 'create',
+      'games/:pid': 'show',
       '*path': 'defaultRoute'
     },
 
@@ -24,10 +25,18 @@ ZmachineClient.Routers = ZmachineClient.Routers || {};
     },
 
     create: function() {
-      var view = new ZmachineClient.Views.CreateGame({collection: this.collection});
-      console.log(view.render());
+      var view = new ZmachineClient.Views.CreateGame({
+        collection: this.collection,
+        model: new ZmachineClient.Models.Game()
+      });
       this.$container.html(view.render().el);
+    },
+
+    show: function() {
+      // TODO
+      console.log('router#show');
     }
+
   });
 
 })();
