@@ -18,7 +18,7 @@ describe('Game Model', function () {
 
   describe('#description', function() {
     it('returns a human-readable description of the game', function() {
-      expect(this.GameModel.description()).to.equal('All Things Devours (devours.z5)');
+      expect(this.GameModel.description()).to.equal('All Things Devours (devours)');
     });
   });
 });

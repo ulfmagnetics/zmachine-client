@@ -23,7 +23,7 @@ ZmachineClient.Models = ZmachineClient.Models || {};
     },
 
     description: function() {
-      return this.get('label') + ' (' + this.get('zfile') + ')';
+      return this.get('label') + ' (' + this.get('name') + ')';
     }
   });
 

@@ -2,7 +2,12 @@
 
 window.ZmachineClient = {
   Config: {
-    apiUrl: 'http://localhost:5000'
+    apiUrl: 'http://localhost:5000',
+    // FIXME this should be added to the API
+    availableGames: [
+      { 'name': 'devours', label: 'All Things Devours' },
+      { 'name': 'zork1', label: 'Zork I' }
+    ]
   },
   Models: {},
   Collections: {},
@@ -10,7 +15,7 @@ window.ZmachineClient = {
   Routers: {},
   init: function () {
     'use strict';
-    console.log('Hello from Backbone!');
+    var router = new this.Routers.Game();
   }
 };
 

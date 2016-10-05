@@ -9,8 +9,16 @@ ZmachineClient.Collections = ZmachineClient.Collections || {};
     url: function() {
       return ZmachineClient.Config.apiUrl + '/games';
     },
-    localStorage: new Backbone.LocalStorage('GameCollection'),
-    model: ZmachineClient.Models.Game
+    //localStorage: new Backbone.LocalStorage('GameCollection'),
+    model: ZmachineClient.Models.Game,
+
   });
+
+  ZmachineClient.Collections.Games.allAvailableGames = function() {
+    return _.map(ZmachineClient.Config.availableGames, function(attrs) {
+      return new ZmachineClient.Models.Game(attrs);
+    });
+  };
+
 
 })();

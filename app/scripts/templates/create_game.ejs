@@ -1,0 +1,13 @@
+<form>
+  <h3>Select a Game</h3>
+  <% games.each(function(game, i) { %>
+    <div class="radio">
+      <label>
+        <input name="name" type="radio" value="<%= game.get('name') %>" <% if (i == 0) { %>checked <% } %>>
+        <%= game.description() %>
+      </label>
+    </div>
+  <% }); %>
+  <button class="btn btn-lg btn-success" href="#">Play</button>
+</form>
+
