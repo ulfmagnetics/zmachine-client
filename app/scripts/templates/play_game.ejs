@@ -3,9 +3,10 @@
     <h3 class="panel-title"><%= game.description() %> (PID <%= game.get('pid') %>)</h3>
   </div>
   <div class="panel-body">
-    <pre class="gametext"><%= _.first(game.get('statuses')) %></pre>
+    <pre class="gametext"><%= game.actions().currentStatus() %></pre>
     <form>
-      &rarr; <input type="text" name="action" />
+      &rarr; <input type="text" name="action" class='action' />
+      <button class="submit btn btn-lg btn-success" href="#">Go</button>
     </form>
   </div>
 </div>

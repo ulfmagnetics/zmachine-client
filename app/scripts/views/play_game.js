@@ -15,7 +15,9 @@ ZmachineClient.Views = ZmachineClient.Views || {};
 
     className: '',
 
-    events: {},
+    events: {
+      'click button.submit': 'submit'
+    },
 
     initialize: function () {
       this.listenTo(this.model, 'change', this.render);
@@ -24,6 +26,18 @@ ZmachineClient.Views = ZmachineClient.Views || {};
     render: function () {
       this.$el.html(this.template({game: this.model}));
       return this;
+    },
+
+    submit: function(event) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      // the API has very weird and non-restful semantics
+      var action = new ZmachineClient.Models.Action({
+        action: this.$el.find('input[name=action]').val()
+      });
+
+      this.model.actions().create(action, {ajaxSync: true});
     }
 
   });

@@ -7,13 +7,21 @@ ZmachineClient.Models = ZmachineClient.Models || {};
 
   ZmachineClient.Models.Game = Backbone.Model.extend({
 
+    idAttribute: 'pid',
+
     initialize: function() {
+      this._actions = new ZmachineClient.Collections.Actions();
+      // FIXME there must be a better way to store a reference to the parent game...
+      this._actions.setGame(this);
+    },
+
+    actions: function() {
+      return this._actions;
     },
 
     defaults: function() {
       return {
-        'label': new Date().toISOString(),
-        'statuses': []
+        'label': new Date().toISOString()
       };
     },
 
@@ -26,7 +34,11 @@ ZmachineClient.Models = ZmachineClient.Models || {};
     parse: function(response, options)  {
       console.log('Game#parse: response=' + JSON.stringify(response));
       if (response.data) {
-        this.get('statuses').push(response.data);
+        var action = new ZmachineClient.Models.Action({
+          pid: this.get('pid'),
+          status: response.data
+        });
+        this._actions.create(action);
         delete response.data;
       }
       return response;
