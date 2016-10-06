@@ -23,6 +23,7 @@
         <h3 class="text-muted">Z-Machine Client</h3>
       </div>
 
+      <div class="alert"></div>
 
       <div class="row col-xs-8">
         <div id="game-container"></div>
@@ -40,6 +41,7 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
+    <script src="bower_components/backbone.localStorage/backbone.localStorage.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/plugins.js -->
@@ -62,9 +64,10 @@
     <script src="scripts/helpers.js"></script>
     <script src="scripts/templates.js"></script>
     <script src="scripts/models/game.js"></script>
-    <script src="scripts/collections/Games.js"></script>
+    <script src="scripts/collections/games.js"></script>
     <script src="scripts/views/create_game.js"></script>
     <script src="scripts/routes/game.js"></script>
+    <script src="scripts/views/play_game.js"></script>
     <!-- endbuild -->
 </body>
 </html>

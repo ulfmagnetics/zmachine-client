@@ -12,6 +12,14 @@
       collection.trigger('reset');
     },
 
+    hideErrors: function() {
+      $('.alert').empty().hide();
+    },
+
+    showError: function(html) {
+      $('.alert').html(html).show();
+    },
+
     showErrors: function (note, errors) {
       $('.has-error').removeClass('has-error');
       $('.alert').html(_.values(errors).join('<br>')).show();

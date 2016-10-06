@@ -20,12 +20,17 @@ ZmachineClient.Views = ZmachineClient.Views || {};
     },
 
     initialize: function () {
-      this.listenTo(this.collection, 'change', this.render);
+      this.allGames = new ZmachineClient.Collections.Games(
+        ZmachineClient.Collections.Games.allAvailableGames()
+      );
+      this.listenTo(this.allGames, 'change', this.render);
       this.listenTo(this.model, 'change:pid', this.beginGame);
+      ZmachineClient.helpers.hideErrors();
     },
 
     render: function () {
-      this.$el.html(this.template({games: this.collection}));
+      // create a dummy collection of available games, since the API doesn't support this
+      this.$el.html(this.template({games: this.allGames}));
       return this;
     },
 
@@ -38,12 +43,15 @@ ZmachineClient.Views = ZmachineClient.Views || {};
       });
 
       if (this.model.isValid()) {
-        this.model.save();
+        // spawn a new game on the server
+        this.collection.create(this.model, {ajaxSync: true});
       }
     },
 
     beginGame: function(event) {
-      console.log('begining game with PID ' + this.model.get('pid'));
+      // FIXME this.model contains the first line of the story now...
+      // how do we pass it along to the "play game" view? session/cookie?
+      this.model.save();
       Backbone.history.navigate('games/' + this.model.get('pid'), {trigger: true});
     },
 

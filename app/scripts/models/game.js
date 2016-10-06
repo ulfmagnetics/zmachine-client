@@ -7,19 +7,14 @@ ZmachineClient.Models = ZmachineClient.Models || {};
 
   ZmachineClient.Models.Game = Backbone.Model.extend({
 
-    idAttribute: 'pid',
-
     initialize: function() {
     },
 
     defaults: function() {
       return {
-        'label': new Date().toISOString()
+        'label': new Date().toISOString(),
+        'statuses': []
       };
-    },
-
-    urlRoot: function() {
-      return ZmachineClient.Config.apiUrl + '/games';
     },
 
     validate: function(attrs, options) {
@@ -29,7 +24,11 @@ ZmachineClient.Models = ZmachineClient.Models || {};
     },
 
     parse: function(response, options)  {
-      console.log(response);
+      console.log('Game#parse: response=' + JSON.stringify(response));
+      if (response.data) {
+        this.get('statuses').push(response.data);
+        delete response.data;
+      }
       return response;
     },
 

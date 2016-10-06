@@ -17,14 +17,16 @@ ZmachineClient.Routers = ZmachineClient.Routers || {};
     $container: $('#game-container'),
 
     initialize: function() {
-      // create a collection of available games, since the API doesn't support this
+      console.log('in Routers.Games#initialize');
       this.collection = new ZmachineClient.Collections.Games();
-      this.collection.add(ZmachineClient.Collections.Games.allAvailableGames());
-      ZmachineClient.helpers.debug(this.collection);
+      this.collection.fetch({ajaxSync: false});
+      console.log('this.collection=' + JSON.stringify(this.collection.toJSON()));
       Backbone.history.start();
     },
 
     create: function() {
+      console.log('in Routers.Games#create');
+      console.log('this.collection=' + JSON.stringify(this.collection.toJSON()));
       var view = new ZmachineClient.Views.CreateGame({
         collection: this.collection,
         model: new ZmachineClient.Models.Game()
@@ -32,9 +34,21 @@ ZmachineClient.Routers = ZmachineClient.Routers || {};
       this.$container.html(view.render().el);
     },
 
-    show: function() {
-      // TODO
-      console.log('router#show');
+    show: function(pid) {
+      console.log('in Routers.Games#show');
+      console.log('this.collection=' + JSON.stringify(this.collection.toJSON()));
+      var model = this.collection.findWhere({ pid: parseInt(pid) });
+      console.log('router#show with pid=' + pid + ', model=' + JSON.stringify(model));
+      if (model) {
+        var view = new ZmachineClient.Views.PlayGame({
+          model: model
+        });
+        this.$container.html(view.render().el);
+      }
+      else {
+        ZmachineClient.helpers.showError('Could not find a game with PID ' + pid);
+        Backbone.history.navigate('games/new');
+      }
     }
 
   });
